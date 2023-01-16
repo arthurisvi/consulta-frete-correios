@@ -1,0 +1,23 @@
+Copy code
+# Ignore files that may contain sensitive information
+.env
+config/*.php
+
+# Ignore common PHP files
+*.log
+*.lock
+*.sw[a-z]
+*.bak
+*.tmp
+*.sql
+
+# Ignore common PHP frameworks files
+/vendor/
+
+# Ignore IDEs files
+.idea/
+*.iml
+
+# Ignore Composer files
+composer.phar
+composer.lock
