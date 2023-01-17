@@ -1,17 +1,17 @@
 <?php
 
 require 'vendor/autoload.php';
-require './app/WebService/Correios.php';
+require './app/Services/CorreiosService.php';
 // use App\WebService\Correios;
 
-$correios = new Correios();
+$correios = new CorreiosService();
 
 $shipping = $correios->calculateShipping(
-  Correios::SEDEX_SERVICE, // service code
+  CorreiosService::SEDEX_SERVICE, // service code
   '09010100', // origin cep
   '31845010', // destination cep
   2, // weight
-  Correios::PACKAGE_CX_FORMAT, // format
+  CorreiosService::PACKAGE_CX_FORMAT, // format
   15, // height
   15, // width
   15, // length

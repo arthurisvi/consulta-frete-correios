@@ -2,7 +2,7 @@
 
 // namespace App\WebService;
 
-class Correios {
+class CorreiosService {
 
   const BASE_URL = 'http://ws.correios.com.br';
 
@@ -24,35 +24,23 @@ class Correios {
     $this->company_password = $company_password;
   }
 
-  public function calculateShipping(
-    $service_code, 
-    $origin_cep, 
-    $destination_cep,
-    $weight, 
-    $format, 
-    $height, 
-    $width, 
-    $length, 
-    $diameter = 0, 
-    $own_hand = false,
-    $declared_value = 0,
-    $receipt = 0){
+  public function calculateShipping($data){
 
     $params = [
       'nCdEmpresa' => $this->company_code,
       'sDsSenha' => $this->company_password,
-      'nCdServico' => $service_code,
-      'sCepOrigem' => $origin_cep,
-      'sCepDestino' => $destination_cep,
-      'nVlPeso' => $weight,
-      'nCdFormato' => $format,
-      'nVlComprimento' => $length,
-      'nVlAltura' => $height,
-      'nVlLargura' => $width,
-      'nVlDiametro' => $diameter,
-      'sCdMaoPropria' => $own_hand ? 'S' : 'N',
-      'nVlValorDeclarado' => $declared_value,
-      'sCdAvisoRecebimento' => $receipt ? 'S' : 'N',
+      'nCdServico' => $data->service_code,
+      'sCepOrigem' => $data->origin_cep,
+      'sCepDestino' => $data->destination_cep,
+      'nVlPeso' => $data->weight,
+      'nCdFormato' => $data->format,
+      'nVlComprimento' => $data->length,
+      'nVlAltura' => $data->height,
+      'nVlLargura' => $data->width,
+      'nVlDiametro' => $data->diameter,
+      'sCdMaoPropria' => $data->own_hand ? 'S' : 'N',
+      'nVlValorDeclarado' => $data->declared_value,
+      'sCdAvisoRecebimento' => $data->receipt ? 'S' : 'N',
       'StrRetorno' => 'xml'
     ];
 
