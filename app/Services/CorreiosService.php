@@ -6,29 +6,11 @@ class CorreiosService {
 
   const BASE_URL = 'http://ws.correios.com.br';
 
-  const SEDEX_SERVICE = '04014';
-  const SEDEX_12_SERVICE = '04782';
-  const SEDEX_10_SERVICE = '04790';
-  const SEDEX_TODAY_SERVICE = '04804';
-  const PAC_SERVICE = '04510';
-
-  const PACKAGE_CX_FORMAT = 1;
-  const ROLL_PRISM_FORMAT = 2;
-  const ENVELOPE_FORMAT = 3;
-
-  private $company_code;
-  private $company_password;
-
-  public function __construct($company_code = '', $company_password = ''){
-    $this->company_code = $company_code;
-    $this->company_password = $company_password;
-  }
-
-  public function calculateShipping($data){
+  public static function calculateShipping($data){
 
     $params = [
-      'nCdEmpresa' => $this->company_code,
-      'sDsSenha' => $this->company_password,
+      'nCdEmpresa' => $data->company_code,
+      'sDsSenha' => $data->company_password,
       'nCdServico' => $data->service_code,
       'sCepOrigem' => $data->origin_cep,
       'sCepDestino' => $data->destination_cep,
@@ -46,12 +28,12 @@ class CorreiosService {
 
     $query = http_build_query($params);
 
-    $result = $this->get('/calculador/CalcPrecoPrazo.aspx?' . $query);
+    $result = self::get('/calculador/CalcPrecoPrazo.aspx?' . $query);
 
     return $result ? $result->cServico : null;
   }
 
-  public function get($resource){
+  public static function get($resource){
     $url = self::BASE_URL . $resource;
 
     $curl = curl_init();

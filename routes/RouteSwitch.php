@@ -26,7 +26,7 @@ abstract class RouteSwitch
     }
   }
 
-  protected function __call($name, $arguments)
+  public function __call($name, $arguments)
   {
     http_response_code(404);
   }

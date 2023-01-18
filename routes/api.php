@@ -1,5 +1,5 @@
 <?php
-
+header("Content-Type: application/json");
 require_once __DIR__ . '/Router.php';
 
 $request_uri = $_SERVER['REQUEST_URI'];
